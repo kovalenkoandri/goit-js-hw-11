@@ -1,3 +1,7 @@
+import axios from 'axios';
+import { inputValue } from './index';
+import { per_page } from './index';
+import { page } from './index';
 export const axiosGet = () =>
   axios.get(`?q=${inputValue}`, {
     params: {

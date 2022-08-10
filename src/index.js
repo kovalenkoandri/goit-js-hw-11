@@ -27,13 +27,24 @@ axios.defaults.baseURL = 'https://pixabay.com/api/';
 const searchForm = document.querySelector('#search-form');
 const gallery = document.querySelector('.gallery');
 const loadMore = document.querySelector('.load-more');
-loadMore.className = `visually-hidden`;
+loadMore.classList.add(`visually-hidden`);
 let page = 1;
+let inputValue;
 searchForm.addEventListener('submit', event => {
   event.preventDefault();
   page = 1;
   gallery.innerHTML = '';
-  const inputValue = event.currentTarget.elements.searchQuery.value;
+  inputValue = event.currentTarget.elements.searchQuery.value;
+  axiosGet();
+  loadMore.classList.remove(`visually-hidden`);
+});
+
+loadMore.addEventListener('click', event => {
+  page += 1;
+  axiosGet();
+});
+  
+function axiosGet() {
   axios
     .get(`?q=${inputValue}`, {
       params: {
@@ -87,11 +98,6 @@ searchForm.addEventListener('submit', event => {
           ``
         )
       );
-      loadMore.removeAttribute('class');
+      
     });
-  
-});
-
-loadMore.addEventListener('click', event => {
-    page += 1;
-  });
+}

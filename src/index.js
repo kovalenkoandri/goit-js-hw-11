@@ -40,17 +40,15 @@ searchForm.addEventListener('submit', event => {
   page = 1;
   gallery.innerHTML = '';
   inputValue = event.currentTarget.elements.searchQuery.value;
-  axiosGet();
-  loadMore.classList.remove(`visually-hidden`);
+  axiosSearch();
 });
 
 loadMore.addEventListener('click', event => {
   page += 1;
-  axiosGet();
+  axiosLoadMore();
 });
 
-function axiosGet() {
-  loadMore.classList.add(`visually-hidden`);
+function axiosSearch() {
   axios
     .get(`?q=${inputValue}`, {
       params: {
@@ -69,8 +67,63 @@ function axiosGet() {
         Notify.failure(
           'Sorry, there are no images matching your search query. Please try again.'
         );
-      }
-      else Notify.info(`Hooray! We found ${response.data.totalHits} images.`);
+      } else Notify.info(`Hooray! We found ${response.data.totalHits} images.`);
+      loadMore.classList.add(`visually-hidden`);
+      setTimeout(() => loadMore.classList.remove(`visually-hidden`), 1000);
+
+      return response;
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .then(function (response) {
+      // always executed
+      console.log(response.data.totalHits);
+      gallery.insertAdjacentHTML(
+        'afterbegin',
+        response.data.hits.reduce(
+          (ac, element) =>
+            ac +
+            `
+<div class="photo-card">
+  <img src="${element.webformatURL}" alt="${element.tags}" loading="lazy" />
+  <div class="info">
+    <p class="info-item">
+      <b>Likes</b> ${element.likes}
+    </p>
+    <p class="info-item">
+      <b>Views</b> ${element.views}
+    </p>
+    <p class="info-item">
+      <b>Comments</b> ${element.comments}
+    </p>
+    <p class="info-item">
+      <b>Downloads</b> ${element.downloads}
+    </p>
+  </div>
+</div>
+`,
+          ``
+        )
+      );
+    });
+}
+function axiosLoadMore() {
+  axios
+    .get(`?q=${inputValue}`, {
+      params: {
+        key: '29101880-694af7e9974b3c9bb9fbf3052',
+        image_typemit: 'photo',
+        orientation: 'horizontal',
+        safesearch: true,
+        per_page: per_page,
+        page: page,
+      },
+    })
+    .then(function (response) {
+      // handle success
+      console.log(response);
       return response;
     })
     .catch(function (error) {
@@ -114,6 +167,5 @@ function axiosGet() {
         loadMore.classList.add(`visually-hidden`);
         return;
       }
-      setTimeout(() => loadMore.classList.remove(`visually-hidden`), 1000);
     });
 }

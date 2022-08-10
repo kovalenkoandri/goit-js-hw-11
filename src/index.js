@@ -33,6 +33,7 @@ const gallery = document.querySelector('.gallery');
 const loadMore = document.querySelector('.load-more');
 loadMore.classList.add(`visually-hidden`);
 let page = 1;
+let per_page = 3;
 let inputValue;
 searchForm.addEventListener('submit', event => {
   event.preventDefault();
@@ -47,7 +48,7 @@ loadMore.addEventListener('click', event => {
   page += 1;
   axiosGet();
 });
-  
+
 function axiosGet() {
   loadMore.classList.add(`visually-hidden`);
   axios
@@ -57,16 +58,19 @@ function axiosGet() {
         image_typemit: 'photo',
         orientation: 'horizontal',
         safesearch: true,
-        per_page: 3,
+        per_page: per_page,
         page: page,
       },
     })
     .then(function (response) {
       // handle success
-      response.data.total === 0 &&
+      console.log(response);
+      if (response.data.totalHits === 0) {
         Notify.failure(
           'Sorry, there are no images matching your search query. Please try again.'
         );
+      }
+      else Notify.info(`Hooray! We found ${response.data.totalHits} images.`);
       return response;
     })
     .catch(function (error) {
@@ -75,7 +79,7 @@ function axiosGet() {
     })
     .then(function (response) {
       // always executed
-      console.log(response.data.hits);
+      console.log(response.data.totalHits);
       gallery.insertAdjacentHTML(
         'afterbegin',
         response.data.hits.reduce(
@@ -103,7 +107,13 @@ function axiosGet() {
           ``
         )
       );
-      
+      if (response.data.hits.length === 0) {
+        Notify.failure(
+          "We're sorry, but you've reached the end of search results."
+        );
+        loadMore.classList.add(`visually-hidden`);
+        return;
+      }
+      setTimeout(() => loadMore.classList.remove(`visually-hidden`), 1000);
     });
- setTimeout(() => loadMore.classList.remove(`visually-hidden`), 1000);
 }

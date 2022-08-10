@@ -14,9 +14,13 @@ style.innerHTML = `
   overflow: hidden;
 }
 .gallery { 
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  }
+  // display: grid;
+  // grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  display: flex;
+}
+.photo-card {
+  flex-basis: 100px;
+}
 img {
     width: 40%;
 }`;
@@ -45,6 +49,7 @@ loadMore.addEventListener('click', event => {
 });
   
 function axiosGet() {
+  loadMore.classList.add(`visually-hidden`);
   axios
     .get(`?q=${inputValue}`, {
       params: {
@@ -100,4 +105,5 @@ function axiosGet() {
       );
       
     });
+ setTimeout(() => loadMore.classList.remove(`visually-hidden`), 1000);
 }

@@ -1,7 +1,7 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { axiosGet } from './axiosGet';
 import { render } from './render';
-import { loadMore } from './index';
+import { loadMore } from '../index';
 export function axiosSearch(response) {
   axiosGet()
     .then(function (response) {

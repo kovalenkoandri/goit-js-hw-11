@@ -1,7 +1,7 @@
-import defaultExport from './style';
+import defaultExport from './js/style';
 import axios from 'axios';
-import { axiosSearch } from './axiosSearch';
-import { axiosLoadMore } from './axiosLoadMore';
+import { axiosSearch } from './js/axiosSearch';
+import { axiosLoadMore } from './js/axiosLoadMore';
 axios.defaults.baseURL = 'https://pixabay.com/api/';
 const searchForm = document.querySelector('#search-form');
 export const gallery = document.querySelector('.gallery');

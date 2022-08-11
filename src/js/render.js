@@ -1,4 +1,4 @@
-import { gallery } from './index'; 
+import { gallery } from '../index'; 
 export const render = response =>
   gallery.insertAdjacentHTML(
     'afterbegin',

@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { inputValue } from '../index';
-import { per_page } from '../index';
 import { page } from '../index';
 export const axiosGet = async () =>
   await axios.get(`?q=${inputValue}`, {
@@ -9,7 +8,7 @@ export const axiosGet = async () =>
       image_typemit: 'photo',
       orientation: 'horizontal',
       safesearch: true,
-      per_page: per_page,
+      per_page: 3,
       page: page,
     },
   });

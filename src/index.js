@@ -8,7 +8,6 @@ export const gallery = document.querySelector('.gallery');
 export const loadMore = document.querySelector('.load-more');
 loadMore.classList.add(`visually-hidden`);
 export let page = 1;
-export let per_page = 3; // change on 40 by the task
 export let inputValue;
 searchForm.addEventListener('submit', event => {
   event.preventDefault();

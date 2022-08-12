@@ -1,10 +1,10 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { axiosGet } from './axiosGet';
+import { axiosGetApiService } from './axiosGet';
 import { render } from './render';
 import { loadMore } from '../index';
 import { gallery } from '../index';
-export function axiosSearch(response) {
-  axiosGet()
+export function axiosSearch() {
+  axiosGetApiService.axiosGet()
     .then(function (response) {
       // handle success
       if (response.data.totalHits === 0) {

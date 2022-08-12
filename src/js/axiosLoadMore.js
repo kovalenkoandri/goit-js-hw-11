@@ -1,9 +1,9 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { axiosGet } from './axiosGet';
+import { axiosGetApiService } from './axiosGet';
 import { render } from './render';
 import { loadMore } from '../index';
 export function axiosLoadMore() {
-  axiosGet()
+  axiosGetApiService.axiosGet()
     .then(function (response) {
       // handle success
       return response;

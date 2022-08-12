@@ -2,7 +2,6 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { axiosGetApiService } from './axiosGet';
 import { render } from './render';
 import { loadMore } from '../index';
-import { gallery } from '../index';
 export function axiosSearch() {
   axiosGetApiService.axiosGet()
     .then(function (response) {
@@ -23,7 +22,7 @@ export function axiosSearch() {
     })
     .then(function (response) {
       // always executed
-      gallery.innerHTML = '';
+      axiosGetApiService.resetInnerHTML();
       render(response);
     });
 }

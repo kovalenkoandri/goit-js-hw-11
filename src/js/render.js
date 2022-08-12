@@ -1,12 +1,12 @@
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-import { gallery } from '../index';
+import { axiosGetApiService } from './axiosGet';
 let lightbox = new SimpleLightbox('a', {
   /* options */
   captionsData: 'alt',
 });
 export const render = response => {
-  gallery.insertAdjacentHTML(
+  axiosGetApiService.gallery.insertAdjacentHTML(
     'afterbegin',
     response.data.hits.reduce(
       (ac, element) =>

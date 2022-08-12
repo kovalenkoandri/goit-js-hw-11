@@ -1,5 +1,7 @@
 import axios from 'axios';
+axios.defaults.baseURL = 'https://pixabay.com/api/';
 class AxiosGetApiService {
+  gallery = document.querySelector('.gallery');
   constructor() {
     this.page = 1;
     this.inputValue = '';
@@ -22,6 +24,10 @@ class AxiosGetApiService {
 
   resetPage() {
     this.page = 1;
+  }
+
+  resetInnerHTML() {
+    this.gallery.innerHTML = '';
   }
 
   get value() {

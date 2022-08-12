@@ -9,11 +9,13 @@ export function axiosSearch() {
       if (response.data.totalHits === 0) {
         Notify.failure(
           'Sorry, there are no images matching your search query. Please try again.'
-        );
-      } else Notify.info(`Hooray! We found ${response.data.totalHits} images.`);
-      loadMore.classList.add(`visually-hidden`);
-      setTimeout(() => loadMore.classList.remove(`visually-hidden`), 1000);
-
+          );
+          loadMore.classList.add(`visually-hidden`);
+      } else {
+        Notify.info(`Hooray! We found ${response.data.totalHits} images.`);
+        loadMore.classList.add(`visually-hidden`);
+        setTimeout(() => loadMore.classList.remove(`visually-hidden`), 1000);
+      }
       return response;
     })
     .catch(function (error) {

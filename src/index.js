@@ -1,10 +1,9 @@
 import defaultExport from './js/style';
 import { axiosGetApiService } from './js/axiosGet';
 import { axiosSearch } from './js/axiosSearch';
-import { axiosLoadMore } from './js/axiosLoadMore';
+import { loadMoreApiService } from './js/axiosLoadMore';
 const searchForm = document.querySelector('#search-form');
-export const loadMore = document.querySelector('.load-more');
-loadMore.classList.add(`visually-hidden`);
+loadMoreApiService.hide();
 searchForm.addEventListener('submit', event => {
   event.preventDefault();
   axiosGetApiService.resetPage();
@@ -12,7 +11,7 @@ searchForm.addEventListener('submit', event => {
   axiosGetApiService.value = event.currentTarget.elements.searchQuery.value;
   axiosSearch();
 });
-loadMore.addEventListener('click', event => {
+loadMoreApiService.loadMoreBtn.addEventListener('click', event => {
   axiosGetApiService.incrementPage();
-  axiosLoadMore();
+  loadMoreApiService.axiosLoadMore();
 });

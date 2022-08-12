@@ -1,20 +1,21 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { axiosGetApiService } from './axiosGet';
 import { render } from './render';
-import { loadMore } from '../index';
+import { loadMoreApiService } from './axiosLoadMore';
 export function axiosSearch() {
-  axiosGetApiService.axiosGet()
+  axiosGetApiService
+    .axiosGet()
     .then(function (response) {
       // handle success
       if (response.data.totalHits === 0) {
         Notify.failure(
           'Sorry, there are no images matching your search query. Please try again.'
-          );
-          loadMore.classList.add(`visually-hidden`);
+        );
+        loadMoreApiService.hide();
       } else {
         Notify.info(`Hooray! We found ${response.data.totalHits} images.`);
-        loadMore.classList.add(`visually-hidden`);
-        setTimeout(() => loadMore.classList.remove(`visually-hidden`), 1000);
+        loadMoreApiService.hide();
+        setTimeout(() => loadMoreApiService.show(), 1000);
       }
       return response;
     })

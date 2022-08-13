@@ -13,7 +13,7 @@ class AxiosGetApiService {
         image_typemit: 'photo',
         orientation: 'horizontal',
         safesearch: true,
-        per_page: 3,
+        per_page: 40,
         page: this.page,
       },
     });

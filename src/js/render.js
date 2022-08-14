@@ -33,5 +33,12 @@ export const render = response => {
     ``
   );
   axiosGetApiService.gallery.insertAdjacentHTML('afterbegin', markup);
+  setTimeout(() => {
+    document.querySelector('.load-more').style.cssText = `
+  position: absolute;
+  bottom: -${document.body.offsetHeight - window.innerHeight}px;
+  left: 50%;
+  `;
+  }, 3000); 
   lightbox.refresh();
 };

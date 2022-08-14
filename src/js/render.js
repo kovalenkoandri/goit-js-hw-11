@@ -6,12 +6,10 @@ let lightbox = new SimpleLightbox('a', {
   captionsData: 'alt',
 });
 export const render = response => {
-  axiosGetApiService.gallery.insertAdjacentHTML(
-    'afterbegin',
-    response.data.hits.reduce(
-      (ac, element) =>
-        ac +
-        `
+  const markup = response.data.hits.reduce(
+    (ac, element) =>
+      ac +
+      `
 <a href="${element.largeImageURL}">
   <div class="photo-card">
     <img src="${element.webformatURL}" alt="${element.tags}" loading="lazy" />
@@ -32,8 +30,8 @@ export const render = response => {
   </div>
 </a>
 `,
-      ``
-    )
+    ``
   );
+  axiosGetApiService.gallery.insertAdjacentHTML('afterbegin', markup);
   lightbox.refresh();
-}
+};

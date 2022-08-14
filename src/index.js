@@ -15,3 +15,7 @@ loadMoreApiService.loadMoreBtn.addEventListener('click', event => {
   axiosGetApiService.incrementPage();
   loadMoreApiService.axiosLoadMore();
 });
+// document.addEventListener('scroll', () => {
+//   if ((document.body.offsetHeight - window.innerHeight)/10)
+//     loadMoreApiService.axiosLoadMore();
+//  });

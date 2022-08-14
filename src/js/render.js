@@ -40,5 +40,13 @@ export const render = response => {
   left: 50%;
   `;
   }, 3000); 
+  const { height: cardHeight } = document
+    .querySelector('.gallery')
+    .firstElementChild.getBoundingClientRect();
+
+  window.scrollBy({
+    top: cardHeight * 2,
+    behavior: 'smooth',
+  });
   lightbox.refresh();
 };

@@ -16,6 +16,10 @@ loadMoreApiService.loadMoreBtn.addEventListener('click', event => {
   loadMoreApiService.axiosLoadMore();
 });
 // document.addEventListener('scroll', () => {
-//   if ((document.body.offsetHeight - window.innerHeight)/10)
-//     loadMoreApiService.axiosLoadMore();
+//   console.log(document.body.offsetHeight);
+//   console.log(window.innerHeight);
+//   if (
+//     (window.scrollY + window.innerHeight)>=((document.body.offsetHeight - window.innerHeight) / 4)
+//   )
+//     setTimeout(() => loadMoreApiService.axiosLoadMore(), 2000);
 //  });
